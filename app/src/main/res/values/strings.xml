@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="desc_image_bookmark">image_bookmark</string>
+    <string name="desc_image_content">image_content</string>
+    <string name="title_favorite">Favorite News</string>
+    <string name="title_detail">Detail Article</string>
+    <string name="title_app">News</string>
+    <string name="desc_image_cancel">image_cancel</string>
+    <string name="desc_image_empty">image_empty</string>
+    <string name="desc_image_back">image_back</string>
+    <string name="news_app">News App</string>
+</resources>
