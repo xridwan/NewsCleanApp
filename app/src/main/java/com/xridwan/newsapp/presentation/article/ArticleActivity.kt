@@ -22,6 +22,7 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener, ArticleAdapte
     private lateinit var binding: ActivityArticleBinding
     private val viewModel: ArticleViewModel by viewModels()
     private val articleAdapter: ArticleAdapter by lazy { ArticleAdapter(this) }
+    private var news: News? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +31,16 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener, ArticleAdapte
 
         binding.ivBack.setOnClickListener(this)
 
-        val news = intent.getParcelableExtra<News>(Constant.EXTRA_DATA)
+        news = intent.getParcelableExtra(Constant.EXTRA_DATA)
         if (news != null) {
             setContent(news)
-            getData(news)
+            getData()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getData()
     }
 
     private fun setContent(news: News?) {
@@ -44,8 +50,8 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener, ArticleAdapte
         }
     }
 
-    private fun getData(news: News) {
-        viewModel.getArticles(news.id, news.name)
+    private fun getData() {
+        viewModel.getArticles(news?.id ?: "", news?.name ?: "")
         viewModel.loading.observe(this) {
             if (it) binding.progressCircular.show()
             else binding.progressCircular.hide()
@@ -53,11 +59,12 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener, ArticleAdapte
         viewModel.dataList.observe(this) {
             if (it.isNullOrEmpty()) {
                 binding.layoutEmpty.linearEmpty.show()
-            } else
+            } else {
                 articleAdapter.differ.submitList(it)
-            binding.rvHeadlines.apply {
-                layoutManager = LinearLayoutManager(this@ArticleActivity)
-                adapter = articleAdapter
+                binding.rvHeadlines.apply {
+                    layoutManager = LinearLayoutManager(this@ArticleActivity)
+                    adapter = articleAdapter
+                }
             }
         }
 //        viewModel.getArticles(source).observe(this) { response ->

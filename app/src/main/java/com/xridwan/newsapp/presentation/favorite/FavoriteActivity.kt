@@ -47,9 +47,12 @@ class FavoriteActivity : AppCompatActivity(), View.OnClickListener, FavoriteAdap
     private fun getFavoriteArticles() {
         favoriteViewModel.getFavoriteArticles.observe(this) {
             if (it.isNullOrEmpty()) {
-                binding.layoutEmpty.linearEmpty.show()
+                binding.apply {
+                    rvFavorite.hide()
+                    layoutEmpty.linearEmpty.show()
+                }
             } else {
-                favoriteAdapter.differ.submitList(it)
+                favoriteAdapter.setData(it)
                 binding.rvFavorite.apply {
                     layoutManager = LinearLayoutManager(this@FavoriteActivity)
                     adapter = favoriteAdapter

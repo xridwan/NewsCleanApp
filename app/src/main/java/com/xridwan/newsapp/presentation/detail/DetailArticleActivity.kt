@@ -1,6 +1,5 @@
 package com.xridwan.newsapp.presentation.detail
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebChromeClient

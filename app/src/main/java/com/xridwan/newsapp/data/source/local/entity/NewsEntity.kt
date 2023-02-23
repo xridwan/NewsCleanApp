@@ -4,30 +4,33 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.xridwan.newsapp.domain.model.News
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity(tableName = "news")
 data class NewsEntity(
     @PrimaryKey
-    @ColumnInfo(name = "id")
-    val id: String,
-
-    @ColumnInfo(name = "name")
-    val name: String,
-
-    @ColumnInfo(name = "description")
-    val description: String,
-
-    @ColumnInfo(name = "url")
-    val url: String,
-
-    @ColumnInfo(name = "category")
-    val category: String,
-
-    @ColumnInfo(name = "language")
-    val language: String,
-
-    @ColumnInfo(name = "country")
-    val country: String,
-) : Parcelable
+    @ColumnInfo(name = "id") val id: String,
+    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "description") val description: String,
+    @ColumnInfo(name = "url") val url: String,
+    @ColumnInfo(name = "category") val category: String,
+    @ColumnInfo(name = "language") val language: String,
+    @ColumnInfo(name = "country") val country: String,
+) : Parcelable {
+    companion object {
+        fun mapEntitiesToDomain(input: List<NewsEntity>): List<News> =
+            input.map {
+                News(
+                    id = it.id,
+                    name = it.name,
+                    description = it.description,
+                    url = it.url,
+                    category = it.category,
+                    language = it.language,
+                    country = it.country
+                )
+            }
+    }
+}

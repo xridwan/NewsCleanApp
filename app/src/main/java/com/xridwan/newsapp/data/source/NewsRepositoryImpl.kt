@@ -1,6 +1,8 @@
 package com.xridwan.newsapp.data.source
 
 import com.xridwan.newsapp.data.source.local.LocalDataSource
+import com.xridwan.newsapp.data.source.local.entity.ArticleEntity
+import com.xridwan.newsapp.data.source.local.entity.NewsEntity
 import com.xridwan.newsapp.data.source.remote.RemoteDataSource
 import com.xridwan.newsapp.data.source.remote.network.ApiResponse
 import com.xridwan.newsapp.data.source.remote.response.MainModel
@@ -9,7 +11,6 @@ import com.xridwan.newsapp.domain.model.Article
 import com.xridwan.newsapp.domain.model.News
 import com.xridwan.newsapp.domain.repository.NewsRepository
 import com.xridwan.newsapp.utils.AppExecutors
-import com.xridwan.newsapp.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -17,13 +18,13 @@ import javax.inject.Inject
 class NewsRepositoryImpl @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
-    private val appExecutors: AppExecutors
+    private val appExecutors: AppExecutors,
 ) : NewsRepository {
 
     override fun getAllNews(): Flow<Resource<List<News>>> =
         object : NetworkBoundResource<List<News>, MainModel>() {
             override fun loadFromDB(): Flow<List<News>> {
-                return localDataSource.getNews().map { DataMapper.mapEntitiesToDomain(it) }
+                return localDataSource.getNews().map { NewsEntity.mapEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<News>?): Boolean {
@@ -35,7 +36,7 @@ class NewsRepositoryImpl @Inject constructor(
             }
 
             override suspend fun saveCallResult(data: MainModel) {
-                val newsList = DataMapper.mapResponsesToEntities(data)
+                val newsList = MainModel.mapResponsesToEntities(data)
                 localDataSource.insertNews(newsList)
             }
         }.asFlow()
@@ -44,7 +45,7 @@ class NewsRepositoryImpl @Inject constructor(
         object : NetworkBoundResource<List<Article>, NewsModel>() {
             override fun loadFromDB(): Flow<List<Article>> {
                 return localDataSource.getArticles(name)
-                    .map { DataMapper.mapArticleEntitiesToDomain(it) }
+                    .map { ArticleEntity.mapArticleEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<Article>?): Boolean {
@@ -56,7 +57,7 @@ class NewsRepositoryImpl @Inject constructor(
             }
 
             override suspend fun saveCallResult(data: NewsModel) {
-                val articleList = DataMapper.mapArticleResponsesToEntities(data)
+                val articleList = NewsModel.mapArticleResponsesToEntities(data)
                 localDataSource.insertArticles(articleList)
             }
 
@@ -64,12 +65,12 @@ class NewsRepositoryImpl @Inject constructor(
 
     override fun getFavoriteArticles(): Flow<List<Article>> {
         return localDataSource.getFavoriteArticles().map {
-            DataMapper.mapArticleEntitiesToDomain(it)
+            ArticleEntity.mapArticleEntitiesToDomain(it)
         }
     }
 
     override fun setFavoriteArticle(article: Article, state: Boolean) {
-        val articleEntity = DataMapper.mapArticleDomainToEntity(article)
+        val articleEntity = Article.mapArticleDomainToEntity(article)
         appExecutors.diskIO().execute {
             localDataSource.setFavoriteArticle(articleEntity, state)
         }

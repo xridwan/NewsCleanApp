@@ -68,5 +68,4 @@ class ArticleAdapter(
     }
 
     val differ = AsyncListDiffer(this, diffCallBack)
-
 }
