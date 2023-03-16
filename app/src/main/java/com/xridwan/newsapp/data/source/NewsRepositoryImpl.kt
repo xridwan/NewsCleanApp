@@ -24,11 +24,13 @@ class NewsRepositoryImpl @Inject constructor(
     override fun getAllNews(): Flow<Resource<List<News>>> =
         object : NetworkBoundResource<List<News>, MainModel>() {
             override fun loadFromDB(): Flow<List<News>> {
-                return localDataSource.getNews().map { NewsEntity.mapEntitiesToDomain(it) }
+                return localDataSource.getNews().map {
+                    NewsEntity.mapEntitiesToDomain(it)
+                }
             }
 
             override fun shouldFetch(data: List<News>?): Boolean {
-                return true
+                return data.isNullOrEmpty()
             }
 
             override suspend fun createCall(): Flow<ApiResponse<MainModel>> {
@@ -60,7 +62,6 @@ class NewsRepositoryImpl @Inject constructor(
                 val articleList = NewsModel.mapArticleResponsesToEntities(data)
                 localDataSource.insertArticles(articleList)
             }
-
         }.asFlow()
 
     override fun getFavoriteArticles(): Flow<List<Article>> {
