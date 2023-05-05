@@ -11,9 +11,9 @@ import com.xridwan.newsapp.R
 import com.xridwan.newsapp.databinding.ActivityDetailArticleBinding
 import com.xridwan.newsapp.domain.model.Article
 import com.xridwan.newsapp.utils.Constant
+import com.xridwan.newsapp.utils.Utils.parcelable
 import dagger.hilt.android.AndroidEntryPoint
 
-@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class DetailArticleActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -48,7 +48,7 @@ class DetailArticleActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getDataFromIntent() {
-        article = intent.getParcelableExtra(Constant.EXTRA_DATA)
+        article = intent.parcelable(Constant.EXTRA_DATA)
         state = article?.isFavorite == true
         isFavorite(state)
     }

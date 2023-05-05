@@ -11,11 +11,11 @@ import com.xridwan.newsapp.domain.model.Article
 import com.xridwan.newsapp.domain.model.News
 import com.xridwan.newsapp.presentation.detail.DetailArticleActivity
 import com.xridwan.newsapp.utils.Constant
+import com.xridwan.newsapp.utils.Utils.parcelable
 import com.xridwan.newsapp.utils.hide
 import com.xridwan.newsapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
-@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class ArticleActivity : AppCompatActivity(), View.OnClickListener, ArticleAdapter.Listener {
 
@@ -29,18 +29,21 @@ class ArticleActivity : AppCompatActivity(), View.OnClickListener, ArticleAdapte
         binding = ActivityArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        getDataFromIntent()
         binding.ivBack.setOnClickListener(this)
-
-        news = intent.getParcelableExtra(Constant.EXTRA_DATA)
-        if (news != null) {
-            setContent(news)
-            getData()
-        }
     }
 
     override fun onResume() {
         super.onResume()
         getData()
+    }
+
+    private fun getDataFromIntent() {
+        news = intent.parcelable(Constant.EXTRA_DATA)
+        if (news != null) {
+            setContent(news)
+            getData()
+        }
     }
 
     private fun setContent(news: News?) {
