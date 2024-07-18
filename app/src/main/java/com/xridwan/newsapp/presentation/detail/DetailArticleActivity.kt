@@ -39,6 +39,7 @@ class DetailArticleActivity : AppCompatActivity(), View.OnClickListener {
             R.id.iv_back -> {
                 onBackPressedDispatcher.onBackPressed()
             }
+
             R.id.iv_bookmark -> {
                 state = !state
                 article?.let { detailArticleViewModel.setFavoriteArticle(it, state) }

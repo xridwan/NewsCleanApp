@@ -15,7 +15,6 @@ import com.xridwan.newsapp.utils.hide
 import com.xridwan.newsapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
-@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity(), View.OnClickListener, FavoriteAdapter.Listener {
 
