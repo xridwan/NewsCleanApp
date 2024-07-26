@@ -4,9 +4,8 @@ import com.xridwan.newsapp.data.source.local.entity.ArticleEntity
 import com.xridwan.newsapp.data.source.local.entity.NewsEntity
 import com.xridwan.newsapp.data.source.local.room.NewsDao
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class LocalDataSource @Inject constructor(
+class LocalDataSource(
     private val newsDao: NewsDao
 ) {
     fun getNews(): Flow<List<NewsEntity>> = newsDao.getNews()

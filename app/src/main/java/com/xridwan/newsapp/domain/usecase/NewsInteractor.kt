@@ -5,9 +5,8 @@ import com.xridwan.newsapp.domain.model.Article
 import com.xridwan.newsapp.domain.model.News
 import com.xridwan.newsapp.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class NewsInteractor @Inject constructor(
+class NewsInteractor(
     private val newsRepository: NewsRepository
 ) : NewsUseCase {
     override fun getAllNews(): Flow<Resource<List<News>>> {

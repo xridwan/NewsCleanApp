@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
-    newsUseCase: NewsUseCase
+    private val newsUseCase: NewsUseCase
 ) : ViewModel() {
 
-    val getFavoriteArticles = newsUseCase.getFavoriteArticles().asLiveData()
+    fun getFavoriteArticles() = newsUseCase.getFavoriteArticles().asLiveData()
 }

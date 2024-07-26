@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    newsUseCase: NewsUseCase
+    private val newsUseCase: NewsUseCase
 ) : ViewModel() {
 
-    val news = newsUseCase.getAllNews().asLiveData()
+    fun news() = newsUseCase.getAllNews().asLiveData()
 }

@@ -96,10 +96,10 @@ class MainAdapter(
                 tvCategory.text = sourceList.category
                 tvCountry.text = sourceList.country
                 tvLanguage.text = sourceList.language
+            }
 
-                itemView.setOnClickListener {
-                    itemClickCallBack.onItemClicked(sourceList)
-                }
+            itemView.setOnClickListener {
+                itemClickCallBack.onItemClicked(sourceList)
             }
         }
     }

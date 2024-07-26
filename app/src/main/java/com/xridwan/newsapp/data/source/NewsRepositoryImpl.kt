@@ -13,9 +13,8 @@ import com.xridwan.newsapp.domain.repository.NewsRepository
 import com.xridwan.newsapp.utils.AppExecutors
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-class NewsRepositoryImpl @Inject constructor(
+class NewsRepositoryImpl(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
     private val appExecutors: AppExecutors,
