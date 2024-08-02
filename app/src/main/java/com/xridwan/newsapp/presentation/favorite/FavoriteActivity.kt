@@ -44,7 +44,7 @@ class FavoriteActivity : AppCompatActivity(), View.OnClickListener, FavoriteAdap
     }
 
     private fun getFavoriteArticles() {
-        favoriteViewModel.getFavoriteArticles.observe(this) {
+        favoriteViewModel.getFavoriteArticles().observe(this) {
             if (it.isNullOrEmpty()) {
                 binding.apply {
                     rvFavorite.hide()

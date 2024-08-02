@@ -20,7 +20,7 @@ import com.xridwan.newsapp.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), MainAdapter.OnItemClickCallBack, View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, MainAdapter.Listener {
 
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnItemClickCallBack, View.
         observeViewModel()
     }
 
-    override fun onItemClicked(data: News) {
+    override fun listener(data: News) {
         startActivity(
             Intent(this, ArticleActivity::class.java)
                 .putExtra(Constant.EXTRA_DATA, data)
@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnItemClickCallBack, View.
                 binding.etSearch.setText("")
                 filterSearchText()
             }
+
             R.id.iv_bookmark -> {
                 startActivity(Intent(this, FavoriteActivity::class.java))
             }
@@ -85,7 +86,8 @@ class MainActivity : AppCompatActivity(), MainAdapter.OnItemClickCallBack, View.
         if (data.isNullOrEmpty()) {
             binding.layoutEmpty.linearEmpty.show()
         } else {
-            mainAdapter = MainAdapter(data.toMutableList(), this)
+            mainAdapter = MainAdapter(this)
+            mainAdapter.submitList(data)
             binding.rvNews.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
                 adapter = mainAdapter
