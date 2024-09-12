@@ -9,4 +9,7 @@
     <string name="desc_image_empty">image_empty</string>
     <string name="desc_image_back">image_back</string>
     <string name="news_app">News App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="generic_error_message">Error</string>
 </resources>

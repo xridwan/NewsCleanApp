@@ -11,68 +11,9 @@ import com.xridwan.newsapp.databinding.HeadlinesItemBinding
 import com.xridwan.newsapp.domain.model.Article
 import com.xridwan.newsapp.utils.Utils
 
-//class FavoriteAdapter(
-//    private val listener: Listener
-//) : RecyclerView.Adapter<FavoriteAdapter.ArticleViewHolder>() {
-//
-//    interface Listener {
-//        fun listener(article: Article)
-//    }
-//
-//    inner class ArticleViewHolder(private val binding: HeadlinesItemBinding) :
-//        RecyclerView.ViewHolder(binding.root) {
-//        fun bind(item: Article) {
-//            binding.apply {
-//                tvTitle.text = item.title
-//                tvDate.text = Utils.formatDate(item.publishedAt)
-//                Picasso.get().load(item.urlToImage).into(imgNews)
-//
-//                val state = item.isFavorite
-//                if (state) ivBookmark.background =
-//                    ContextCompat.getDrawable(itemView.context, R.drawable.ic_bookmark_true)
-//                else ivBookmark.background =
-//                    ContextCompat.getDrawable(itemView.context, R.drawable.ic_bookmark_false)
-//            }
-//            itemView.setOnClickListener {
-//                listener.listener(item)
-//            }
-//        }
-//    }
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-//        val binding =
-//            HeadlinesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        return ArticleViewHolder(binding)
-//    }
-//
-//    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-//        holder.apply {
-//            bind(differ.currentList[position])
-//            setIsRecyclable(false)
-//        }
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return differ.currentList.size
-//    }
-//
-//    private val diffCallBack = object : DiffUtil.ItemCallback<Article>() {
-//        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-//            return oldItem.id == newItem.id
-//        }
-//
-//        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-//            return oldItem == newItem
-//        }
-//    }
-//
-//    val differ = AsyncListDiffer(this, diffCallBack)
-//
-//}
-
-class FavoriteAdapter(
+class BookmarkAdapter(
     private val listener: Listener,
-) : RecyclerView.Adapter<FavoriteAdapter.ArticleViewHolder>() {
+) : RecyclerView.Adapter<BookmarkAdapter.ArticleViewHolder>() {
 
     interface Listener {
         fun listener(article: Article)

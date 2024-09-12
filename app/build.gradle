@@ -10,12 +10,12 @@ apply from: '../shared-dependencies.gradle'
 
 android {
     namespace 'com.xridwan.newsapp'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.xridwan.newsapp"
         minSdk 23
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 

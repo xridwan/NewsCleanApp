@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.xridwan.newsapp.databinding.NewsItemBinding
 import com.xridwan.newsapp.domain.model.News
 
-class MainAdapter(
+class NewsAdapter(
     private val listener: Listener
-) : RecyclerView.Adapter<MainAdapter.MainViewHolder>(), Filterable {
+) : RecyclerView.Adapter<NewsAdapter.MainViewHolder>(), Filterable {
 
     private var originalList: List<News> = listOf()
     private var filteredList: List<News> = listOf()

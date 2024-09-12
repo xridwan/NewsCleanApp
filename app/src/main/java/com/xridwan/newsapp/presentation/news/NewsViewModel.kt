@@ -1,4 +1,4 @@
-package com.xridwan.newsapp.presentation.favorite
+package com.xridwan.newsapp.presentation.news
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -7,9 +7,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteViewModel @Inject constructor(
+class NewsViewModel @Inject constructor(
     private val newsUseCase: NewsUseCase
 ) : ViewModel() {
 
-    fun getFavoriteArticles() = newsUseCase.getFavoriteArticles().asLiveData()
+    fun news() = newsUseCase.getAllNews().asLiveData()
 }
