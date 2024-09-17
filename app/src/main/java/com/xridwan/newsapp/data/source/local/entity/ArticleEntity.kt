@@ -20,21 +20,4 @@ data class ArticleEntity(
     @ColumnInfo(name = "urlToImage") val urlToImage: String?,
     @ColumnInfo(name = "publishedAt") val publishedAt: String?,
     @ColumnInfo(name = "is_favorite") var isFavorite: Boolean = false
-) : Parcelable {
-    companion object {
-        fun mapArticleEntitiesToDomain(input: List<ArticleEntity>): List<Article> =
-            input.map {
-                Article(
-                    id = it.id,
-                    name = it.name,
-                    author = it.author,
-                    title = it.title,
-                    desc = it.description,
-                    url = it.url,
-                    urlToImage = it.urlToImage,
-                    publishedAt = it.publishedAt,
-                    isFavorite = it.isFavorite
-                )
-            }
-    }
-}
+) : Parcelable

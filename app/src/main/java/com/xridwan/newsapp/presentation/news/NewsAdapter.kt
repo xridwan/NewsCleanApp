@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import com.xridwan.newsapp.databinding.NewsItemBinding
+import com.xridwan.newsapp.databinding.ViewItemNewsBinding
 import com.xridwan.newsapp.domain.model.News
 
 class NewsAdapter(
@@ -15,7 +15,7 @@ class NewsAdapter(
     private var originalList: List<News> = listOf()
     private var filteredList: List<News> = listOf()
 
-    inner class MainViewHolder(private val binding: NewsItemBinding) :
+    inner class MainViewHolder(private val binding: ViewItemNewsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: News) {
             binding.apply {
@@ -32,7 +32,8 @@ class NewsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val binding = NewsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ViewItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MainViewHolder(binding)
     }
 
