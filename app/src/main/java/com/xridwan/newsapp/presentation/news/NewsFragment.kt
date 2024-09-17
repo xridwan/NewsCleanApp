@@ -89,11 +89,6 @@ class NewsFragment : Fragment(), NewsAdapter.Listener, View.OnClickListener {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     override fun listener(data: News) {
         val bundle = Bundle().apply {
             putParcelable(Constant.EXTRA_DATA, data)
@@ -112,5 +107,10 @@ class NewsFragment : Fragment(), NewsAdapter.Listener, View.OnClickListener {
                 findNavController().navigate(R.id.action_newsFragment_to_bookmarkFragment)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -12,26 +12,7 @@ data class MainModel(
 
     @field:SerializedName("sources")
     val sourceList: MutableList<SourceList>
-): Parcelable{
-    companion object{
-        fun mapResponsesToEntities(input: MainModel): List<NewsEntity> {
-            val newsList = ArrayList<NewsEntity>()
-            input.sourceList.map {
-                val news = NewsEntity(
-                    id = it.id,
-                    name = it.name,
-                    description = it.description,
-                    url = it.url,
-                    category = it.category,
-                    language = it.language,
-                    country = it.country
-                )
-                newsList.add(news)
-            }
-            return newsList
-        }
-    }
-}
+): Parcelable
 
 @Parcelize
 data class SourceList(

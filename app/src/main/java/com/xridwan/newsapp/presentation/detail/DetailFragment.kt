@@ -15,6 +15,7 @@ import com.xridwan.newsapp.databinding.FragmentDetailBinding
 import com.xridwan.newsapp.domain.model.Article
 import com.xridwan.newsapp.utils.Constant
 import com.xridwan.newsapp.utils.Utils.parcelable
+import com.xridwan.newsapp.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

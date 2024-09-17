@@ -1,8 +1,6 @@
 package com.xridwan.newsapp.data.source
 
 import com.xridwan.newsapp.data.source.local.LocalDataSource
-import com.xridwan.newsapp.data.source.local.entity.ArticleEntity
-import com.xridwan.newsapp.data.source.local.entity.NewsEntity
 import com.xridwan.newsapp.data.source.remote.RemoteDataSource
 import com.xridwan.newsapp.data.source.remote.network.ApiResponse
 import com.xridwan.newsapp.data.source.remote.response.MainModel
@@ -11,6 +9,8 @@ import com.xridwan.newsapp.domain.model.Article
 import com.xridwan.newsapp.domain.model.News
 import com.xridwan.newsapp.domain.repository.NewsRepository
 import com.xridwan.newsapp.utils.AppExecutors
+import com.xridwan.newsapp.utils.toDomainModel
+import com.xridwan.newsapp.utils.toEntityModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -24,7 +24,9 @@ class NewsRepositoryImpl(
         object : NetworkBoundResource<List<News>, MainModel>() {
             override fun loadFromDB(): Flow<List<News>> {
                 return localDataSource.getNews().map {
-                    NewsEntity.mapEntitiesToDomain(it)
+                    it.map { newsEntity ->
+                        newsEntity.toDomainModel()
+                    }
                 }
             }
 
@@ -37,7 +39,9 @@ class NewsRepositoryImpl(
             }
 
             override suspend fun saveCallResult(data: MainModel) {
-                val newsList = MainModel.mapResponsesToEntities(data)
+                val newsList = data.sourceList.map {
+                    it.toEntityModel()
+                }
                 localDataSource.insertNews(newsList)
             }
         }.asFlow()
@@ -45,12 +49,15 @@ class NewsRepositoryImpl(
     override fun getAllArticle(id: String, name: String): Flow<Resource<List<Article>>> =
         object : NetworkBoundResource<List<Article>, NewsModel>() {
             override fun loadFromDB(): Flow<List<Article>> {
-                return localDataSource.getArticles(name)
-                    .map { ArticleEntity.mapArticleEntitiesToDomain(it) }
+                return localDataSource.getArticles(name).map {
+                    it.map { article ->
+                        article.toDomainModel()
+                    }
+                }
             }
 
             override fun shouldFetch(data: List<Article>?): Boolean {
-                return true
+                return false
             }
 
             override suspend fun createCall(): Flow<ApiResponse<NewsModel>> {
@@ -58,19 +65,23 @@ class NewsRepositoryImpl(
             }
 
             override suspend fun saveCallResult(data: NewsModel) {
-                val articleList = NewsModel.mapArticleResponsesToEntities(data)
+                val articleList = data.articles.map {
+                    it.toEntityModel()
+                }
                 localDataSource.insertArticles(articleList)
             }
         }.asFlow()
 
     override fun getFavoriteArticles(): Flow<List<Article>> {
         return localDataSource.getFavoriteArticles().map {
-            ArticleEntity.mapArticleEntitiesToDomain(it)
+            it.map { article ->
+                article.toDomainModel()
+            }
         }
     }
 
     override fun setFavoriteArticle(article: Article, state: Boolean) {
-        val articleEntity = Article.mapArticleDomainToEntity(article)
+        val articleEntity = article.toEntityModel()
         appExecutors.diskIO().execute {
             localDataSource.setFavoriteArticle(articleEntity, state)
         }

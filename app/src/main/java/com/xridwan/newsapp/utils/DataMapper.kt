@@ -2,91 +2,74 @@ package com.xridwan.newsapp.utils
 
 import com.xridwan.newsapp.data.source.local.entity.ArticleEntity
 import com.xridwan.newsapp.data.source.local.entity.NewsEntity
-import com.xridwan.newsapp.data.source.remote.response.MainModel
-import com.xridwan.newsapp.data.source.remote.response.NewsModel
-import com.xridwan.newsapp.domain.model.Article
+import com.xridwan.newsapp.data.source.remote.response.Article
+import com.xridwan.newsapp.data.source.remote.response.SourceList
 import com.xridwan.newsapp.domain.model.News
 
-object DataMapper {
 
-    /**
-     * News data
-     */
+fun SourceList.toEntityModel(): NewsEntity {
+    return NewsEntity(
+        id = this.id,
+        name = this.name,
+        description = this.description,
+        url = this.url,
+        category = this.category,
+        language = this.language,
+        country = this.country
+    )
+}
 
-    fun mapResponsesToEntities(input: MainModel): List<NewsEntity> {
-        val newsList = ArrayList<NewsEntity>()
-        input.sourceList.map {
-            val news = NewsEntity(
-                id = it.id,
-                name = it.name,
-                description = it.description,
-                url = it.url,
-                category = it.category,
-                language = it.language,
-                country = it.country
-            )
-            newsList.add(news)
-        }
-        return newsList
-    }
+fun NewsEntity.toDomainModel(): News {
+    return News(
+        id = this.id,
+        name = this.name,
+        description = this.description,
+        url = this.url,
+        category = this.category,
+        language = this.language,
+        country = this.country,
+        isFavorite = false
+    )
+}
 
-    fun mapEntitiesToDomain(input: List<NewsEntity>): List<News> =
-        input.map {
-            News(
-                id = it.id,
-                name = it.name,
-                description = it.description,
-                url = it.url,
-                category = it.category,
-                language = it.language,
-                country = it.country
-            )
-        }
+fun Article.toEntityModel(): ArticleEntity {
+    return ArticleEntity(
+        id = this.id,
+        name = this.sources.name,
+        author = this.author,
+        title = this.title,
+        description = this.desc,
+        url = this.url,
+        urlToImage = this.urlToImage,
+        publishedAt = this.publishedAt,
+        isFavorite = false
+    )
+}
 
-    /**
-     * Articles data
-     */
+fun ArticleEntity.toDomainModel(): com.xridwan.newsapp.domain.model.Article {
+    return com.xridwan.newsapp.domain.model.Article(
+        id = this.id,
+        name = this.name,
+        author = this.author,
+        title = this.title,
+        desc = this.description,
+        url = this.url,
+        urlToImage = this.urlToImage,
+        publishedAt = this.publishedAt,
+        isFavorite = this.isFavorite
+    )
+}
 
-    fun mapArticleResponsesToEntities(input: NewsModel): List<ArticleEntity> {
-        val articleList = ArrayList<ArticleEntity>()
-        input.articles.map {
-            val article = ArticleEntity(
-                name = it.sources.name,
-                author = it.author,
-                title = it.title,
-                description = it.desc,
-                url = it.url,
-                urlToImage = it.urlToImage,
-                publishedAt = it.publishedAt,
-                isFavorite = false
-            )
-            articleList.add(article)
-        }
-        return articleList
-    }
-
-    fun mapArticleEntitiesToDomain(input: List<ArticleEntity>): List<Article> =
-        input.map {
-            Article(
-                name = it.name,
-                author = it.author,
-                title = it.title,
-                desc = it.description,
-                url = it.url,
-                urlToImage = it.urlToImage,
-                publishedAt = it.publishedAt,
-                isFavorite = it.isFavorite
-            )
-        }
-
-    fun mapArticleDomainToEntity(input: Article) = ArticleEntity(
-        name = input.name,
-        author = input.author,
-        title = input.title,
-        description = input.desc,
-        url = input.url,
-        urlToImage = input.urlToImage,
-        publishedAt = input.publishedAt,
-        isFavorite = input.isFavorite
+fun com.xridwan.newsapp.domain.model.Article.toEntityModel(): ArticleEntity {
+    return ArticleEntity(
+        id = this.id,
+        name = this.name,
+        author = this.author,
+        title = this.title,
+        description = this.desc,
+        url = this.url,
+        urlToImage = this.urlToImage,
+        publishedAt = this.publishedAt,
+        isFavorite = this.isFavorite
     )
 }

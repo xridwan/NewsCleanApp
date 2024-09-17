@@ -18,19 +18,4 @@ data class NewsEntity(
     @ColumnInfo(name = "category") val category: String,
     @ColumnInfo(name = "language") val language: String,
     @ColumnInfo(name = "country") val country: String,
-) : Parcelable {
-    companion object {
-        fun mapEntitiesToDomain(input: List<NewsEntity>): List<News> =
-            input.map {
-                News(
-                    id = it.id,
-                    name = it.name,
-                    description = it.description,
-                    url = it.url,
-                    category = it.category,
-                    language = it.language,
-                    country = it.country
-                )
-            }
-    }
-}
+) : Parcelable
