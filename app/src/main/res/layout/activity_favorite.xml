@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whitePrimary"
-    tools:context=".presentation.favorite.FavoriteActivity">
+    tools:context=".presentation.bookmark.FavoriteActivity">
 
     <LinearLayout
         android:id="@+id/line1"

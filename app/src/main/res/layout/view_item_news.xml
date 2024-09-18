@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardElevation="6dp"
-    app:contentPadding="16dp">
+    app:contentPadding="16dp"
+    app:rippleColor="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
             android:textColor="@android:color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            tools:text="name" />
+            tools:text="Name" />
 
         <TextView
             android:id="@+id/tv_desc"
@@ -34,7 +35,7 @@
             android:lineSpacingExtra="6dp"
             android:maxLines="3"
             android:textSize="13sp"
-            tools:text="desc" />
+            tools:text="Desc" />
 
         <View
             android:layout_width="match_parent"
@@ -58,7 +59,7 @@
                 android:gravity="start"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                tools:text="category" />
+                tools:text="Category" />
 
             <TextView
                 android:id="@+id/tv_language"
@@ -69,7 +70,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                tools:text="language" />
+                tools:text="Language" />
 
             <TextView
                 android:id="@+id/tv_country"
@@ -80,10 +81,7 @@
                 android:gravity="end"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                tools:text="country" />
+                tools:text="Country" />
         </LinearLayout>
-
-
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

@@ -54,9 +54,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/mmedium"
             android:lineSpacingExtra="6dp"
-            android:text="desc"
             android:textColor="@android:color/darker_gray"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            tools:text="Desc" />
 
     </LinearLayout>
 

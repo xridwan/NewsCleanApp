@@ -15,18 +15,4 @@ data class Article(
     val urlToImage: String?,
     val publishedAt: String?,
     val isFavorite: Boolean = false,
-) : Parcelable {
-    companion object {
-        fun mapArticleDomainToEntity(input: Article) = ArticleEntity(
-            id = input.id,
-            name = input.name,
-            author = input.author,
-            title = input.title,
-            description = input.desc,
-            url = input.url,
-            urlToImage = input.urlToImage,
-            publishedAt = input.publishedAt,
-            isFavorite = input.isFavorite
-        )
-    }
-}
+) : Parcelable

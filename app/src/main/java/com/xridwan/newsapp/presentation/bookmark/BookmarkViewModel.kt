@@ -1,4 +1,4 @@
-package com.xridwan.newsapp.presentation.favorite
+package com.xridwan.newsapp.presentation.bookmark
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

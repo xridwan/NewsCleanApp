@@ -1,4 +1,4 @@
-package com.xridwan.newsapp.presentation.favorite
+package com.xridwan.newsapp.presentation.bookmark
 
 import android.os.Bundle
 import android.view.LayoutInflater
