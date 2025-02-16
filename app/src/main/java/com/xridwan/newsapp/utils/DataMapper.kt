@@ -6,7 +6,6 @@ import com.xridwan.newsapp.data.source.remote.response.Article
 import com.xridwan.newsapp.data.source.remote.response.SourceList
 import com.xridwan.newsapp.domain.model.News
 
-
 fun SourceList.toEntityModel(): NewsEntity {
     return NewsEntity(
         id = this.id,
